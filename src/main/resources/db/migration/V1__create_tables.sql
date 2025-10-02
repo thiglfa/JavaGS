@@ -1,0 +1,19 @@
+-- usuarios e roles (simples)
+CREATE TABLE usuario (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  nome VARCHAR(150) NOT NULL,
+  role VARCHAR(30) NOT NULL,
+  enabled BOOLEAN DEFAULT TRUE
+);
+
+-- tabela de motos
+CREATE TABLE moto (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  placa VARCHAR(20) NOT NULL UNIQUE,
+  modelo VARCHAR(150) NOT NULL,
+  ano INTEGER,
+  status VARCHAR(30) DEFAULT 'DISPONIVEL',
+  km INTEGER DEFAULT 0
+);

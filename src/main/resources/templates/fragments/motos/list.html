@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerFrag">
+    <title>Motos</title>
 </head>
 <body>
-
+<div th:replace="fragments/menu :: menuFrag"></div>
+<h1>Lista de Motos</h1>
+<a th:href="@{/motos/novo}">Nova Moto</a>
+<table>
+    <thead><tr><th>Placa</th><th>Modelo</th><th>Ano</th><th>Status</th><th>Ações</th></tr></thead>
+    <tbody>
+    <tr th:each="m : ${motos}">
+        <td th:text="${m.placa}">PLACA</td>
+        <td th:text="${m.modelo}">MODELO</td>
+        <td th:text="${m.ano}">ANO</td>
+        <td th:text="${m.status}">STATUS</td>
+        <td>
+            <a th:href="@{'/motos/' + ${m.id}}">Detalhes</a> |
+            <a th:href="@{'/motos/editar/' + ${m.id}}">Editar</a> |
+            <form th:action="@{'/motos/excluir/' + ${m.id}}" method="post" style="display:inline">
+                <button type="submit" onclick="return confirm('Excluir?')">Excluir</button>
+            </form> |
+            <a th:href="@{'/reservas/novo'(motoId=${m.id})}">Reservar</a> |
+            <a th:href="@{'/manutencao/solicitar/' + ${m.id}}">Solicitar Manutenção</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:replace="fragments/footer :: footerFrag"></div>
 </body>
 </html>
